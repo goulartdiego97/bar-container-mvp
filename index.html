@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071426" />
+  <title>Bar Container — Cadastro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span class="brand-bar">BAR</span><strong>CONTAINER</strong></div>
+        <div><div class="brand-title">BAR <span>CONTAINER</span></div><div class="brand-subtitle">SISTEMA DE CADASTRO</div></div>
+      </div>
+      <div class="sidebar-copy">Sistema de cadastro de clientes e universitários do Bar Container.</div>
+      <div class="sidebar-watermark">BAR<br><b>CONTAINER</b></div>
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="home"><span>⌂</span> Início <small>Cadastro</small></button>
+        <button class="nav-item" data-view="search"><span>⌕</span> Busca <small>Encontrar pessoas</small></button>
+      </nav>
+      <div class="sidebar-footer"><div class="mini-logo">BC</div><div><b>Bar Container</b><small>Versão 1.0.0 · MVP</small></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+        <div class="topbar-title"><span class="status-dot"></span> Área de cadastro</div>
+        <button class="top-home" data-view="home" aria-label="Início">⌂</button>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="welcome">
+          <div class="logo-orb"><div class="brand-mark small"><span class="brand-bar">BAR</span><strong>CONTAINER</strong></div></div>
+          <p class="eyebrow">BEM-VINDO AO CONTAINER</p>
+          <h1 id="homeHeading">Cadastrar universitário</h1>
+          <p class="muted">Crie um cadastro ou encontre alguém da comunidade.</p>
+        </div>
+        <form class="panel form-panel" id="profileForm">
+          <input type="hidden" id="profileId" />
+          <div class="panel-heading"><div><span class="eyebrow">DADOS DO PERFIL</span><h2>Informações pessoais</h2></div><span class="required-note">* obrigatório</span></div>
+          <div class="form-grid">
+            <label class="field full">Nome completo <span>*</span><input id="name" required maxlength="90" placeholder="Ex.: Gabriel Oliveira" autocomplete="name" /></label>
+            <label class="field full">Curso <span>*</span><input id="course" required maxlength="100" placeholder="Ex.: Engenharia de Software" list="courses" /><datalist id="courses"><option>Engenharia de Software</option><option>Direito</option><option>Medicina</option><option>Engenharia Civil</option><option>Administração</option><option>Educação Física</option></datalist></label>
+            <label class="field">Atlética <small>opcional</small><input id="athletics" maxlength="80" placeholder="Ex.: Atlética CompEng" /></label>
+            <label class="field">Matrícula <small>opcional</small><input id="registration" maxlength="40" placeholder="Número de matrícula" /></label>
+          </div>
+          <div class="photo-row">
+            <div class="avatar avatar-large" id="formAvatar">BC</div>
+            <div class="photo-info"><b>Foto de perfil</b><p class="muted">Escolha uma imagem JPG, PNG ou WEBP.</p><label class="upload-btn" for="photoInput">＋ Escolher foto</label><input type="file" id="photoInput" accept="image/*" hidden /><button type="button" class="text-btn" id="removePhoto">Remover foto</button></div>
+          </div>
+          <div class="form-actions"><button class="btn btn-ghost" type="button" id="resetForm">Limpar</button><button class="btn btn-primary" type="submit" id="saveBtn">Salvar cadastro <span>→</span></button></div>
+          <p class="form-message" id="formMessage" role="status"></p>
+        </form>
+        <div class="stats-row"><div class="stat-card"><span class="stat-icon">♙</span><div><small>CADASTROS</small><strong id="totalCount">0</strong></div></div><div class="stat-card"><span class="stat-icon">⌕</span><div><small>BUSCA RÁPIDA</small><strong>Nome ou curso</strong></div><button class="stat-link" data-view="search">Buscar →</button></div></div>
+      </section>
+
+      <section class="view" id="view-search">
+        <div class="page-heading"><div><p class="eyebrow">DIRETÓRIO CONTAINER</p><h1>Buscar cadastro</h1><p class="muted">Encontre universitários por nome, curso, atlética ou matrícula.</p></div><button class="btn btn-primary" id="newFromSearch">＋ Novo cadastro</button></div>
+        <div class="search-bar"><span>⌕</span><input id="searchInput" placeholder="Digite um nome, curso ou matrícula..." autocomplete="off" /><button id="clearSearch" aria-label="Limpar busca">×</button></div>
+        <div class="results-toolbar"><span id="resultsLabel">Todos os cadastros</span><span id="resultCount">0 resultados</span></div>
+        <div class="results-grid" id="resultsGrid"></div>
+        <div class="empty-state" id="emptyState"><div class="empty-icon">⌕</div><h3>Nenhum cadastro encontrado</h3><p>Tente outro termo ou cadastre uma nova pessoa.</p><button class="btn btn-primary" id="emptyNew">Criar cadastro</button></div>
+      </section>
+
+      <section class="view" id="view-profile">
+        <div class="page-heading"><div><p class="eyebrow">DIRETÓRIO CONTAINER</p><h1>Perfil do universitário</h1><p class="muted">Visualize e atualize as informações cadastradas.</p></div><button class="btn btn-ghost" id="backToSearch">← Voltar à busca</button></div>
+        <div class="profile-layout">
+          <div class="panel profile-summary"><div class="profile-cover"></div><div class="profile-avatar-wrap"><div class="avatar avatar-profile" id="detailAvatar">BC</div></div><h2 id="detailName">Nome do universitário</h2><p id="detailCourse" class="muted">Curso</p><span class="profile-tag" id="detailAthletics">Atlética não informada</span><div class="profile-meta"><span>MATRÍCULA</span><strong id="detailRegistration">Não informada</strong></div><button class="btn btn-primary full-btn" id="editProfile">Editar cadastro</button></div>
+          <form class="panel form-panel edit-panel" id="editForm"><input type="hidden" id="editId" /><div class="panel-heading"><div><span class="eyebrow">EDITAR INFORMAÇÕES</span><h2>Dados do cadastro</h2></div></div>
+            <div class="form-grid"><label class="field full">Nome completo <span>*</span><input id="editName" required maxlength="90" /></label><label class="field full">Curso <span>*</span><input id="editCourse" required maxlength="100" /></label><label class="field">Atlética <small>opcional</small><input id="editAthletics" maxlength="80" /></label><label class="field">Matrícula <small>opcional</small><input id="editRegistration" maxlength="40" /></label></div>
+            <div class="photo-row compact"><div class="avatar" id="editAvatar">BC</div><div class="photo-info"><b>Foto de perfil</b><label class="upload-btn" for="editPhotoInput">Alterar foto</label><input type="file" id="editPhotoInput" accept="image/*" hidden /></div></div>
+            <div class="form-actions"><button type="button" class="btn btn-danger-outline" id="deleteProfile">Excluir cadastro</button><button class="btn btn-primary" type="submit">Salvar alterações</button></div><p class="form-message" id="editMessage" role="status"></p>
+          </form>
+        </div>
+      </section>
+      <footer class="footer">BAR CONTAINER <span>•</span> A CASA DO UNIVERSITÁRIO <span class="footer-right">MVP 1.0.0</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
